@@ -268,7 +268,7 @@ class HttpClient
         $queryParameters = array_filter($query, function ($k) {
             return !(0 === stripos($k, 'utm_'));
         }, \ARRAY_FILTER_USE_KEY);
-        $effectiveUrl = (string) new Uri($uri->withFragment('')->withQuery(http_build_query($queryParameters)));
+        $effectiveUrl = (string)Uri::withQueryValues(new Uri($uri->withFragment('')->withQuery('')), $queryParameters);
 
         $this->logger->info('Data fetched: {data}', ['data' => [
             'effective_url' => $effectiveUrl,
